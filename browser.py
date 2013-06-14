@@ -15,4 +15,14 @@ class Browser:
 		self.window.add(self.browser)
 		self.window.show_all()
 
-		gtk.main()
+	def get_title(self):
+		self.browser.execute_script("var a=document.getElementById('playerSongTitle').firstChild;document.title=a.innerText||a.textContent")
+		return self.browser.get_main_frame().get_title()
+
+	def get_artist(self):
+		self.browser.execute_script("var a=document.getElementById('player-artist').firstChild;document.title=a.innerText||a.textContent")
+		return self.browser.get_main_frame().get_title()
+
+	def get_album(self):
+		self.browser.execute_script("var a=document.getElementById('player-artist').nextSibling.nextSibling.firstChild;document.title=a.innerText||a.textContent")
+		return self.browser.get_main_frame().get_title()
