@@ -36,3 +36,12 @@ class Browser:
 	def get_album(self):
 		self.browser.execute_script("var a=document.getElementById('player-artist').nextSibling.nextSibling.firstChild;document.title=a.innerText||a.textContent")
 		return self.browser.get_main_frame().get_title()
+
+	def play_pause(self):
+		self.browser.execute_script('SJBpost("playPause")')
+
+	def next(self):
+		self.browser.execute_script('SJBpost("nextSong")')
+
+	def prev(self):
+		self.browser.execute_script('SJBpost("prevSong")')
