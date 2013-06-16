@@ -14,7 +14,7 @@ class Browser:
 		libsoup = ctypes.CDLL(self.config.getProperty("path_libsoup"))
 		libwebkit = ctypes.CDLL(self.config.getProperty("path_libwebkit"))
 		session = libwebkit.webkit_get_default_session()
-		cookiejar = libsoup.soup_cookie_jar_text_new('./my_cookie', False)
+		cookiejar = libsoup.soup_cookie_jar_text_new(self.config.getProperty("cookie"), False)
 		libsoup.soup_session_add_feature(session, cookiejar)
 
 		self.browser = webkit.WebView()

@@ -18,6 +18,8 @@ def create_config():
 	path_libsoup = raw_input("Path to libsoup: ")
 	p.setProperty("path_libwebkit", path_libwebkit)
 	p.setProperty("path_libsoup", path_libsoup)
+	p.setProperty("path_config", configdir)
+	p.setProperty("cookie", configdir+'/cookie')
 	p.store(open(configdir+'/'+configfile, 'w'))
 
 def setup():
