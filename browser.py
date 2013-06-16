@@ -6,13 +6,13 @@ import gtk
 import ctypes
 
 class Browser:
-
-	def __init__(self):
+	def __init__(self, config):
+		self.config = config
 		self.window = gtk.Window()
 		self.window.resize(1024,768)
 
-		libsoup = ctypes.CDLL('/usr/lib/x86_64-linux-gnu/libsoup-2.4.so')
-		libwebkit = ctypes.CDLL('/usr/lib/libwebkitgtk-1.0.so.0')
+		libsoup = ctypes.CDLL(self.config.getProperty("path_libsoup"))
+		libwebkit = ctypes.CDLL(self.config.getProperty("path_libwebkit"))
 		session = libwebkit.webkit_get_default_session()
 		cookiejar = libsoup.soup_cookie_jar_text_new('./my_cookie', False)
 		libsoup.soup_session_add_feature(session, cookiejar)
