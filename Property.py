@@ -2,6 +2,7 @@
 
 class Property(object):
 	def __init__(self):
+		self.d = {}
 		pass
 
 	def __parse(self, lines):
