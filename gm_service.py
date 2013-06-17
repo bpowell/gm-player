@@ -38,15 +38,19 @@ class GMPlayerService(dbus.service.Object):
 		return self.browser.get_album()
 
 	@dbus.service.method('com.github.bpowell.gm_player')
-	def status(self, sep=' ', artist=True, title=True, album=True):
+	def status(self):
 		output = ""
-		if artist:
-			output += get_artist()
+		output += self.get_artist()
+		output += " - " + self.get_title()
+		output += " - " + self.get_album()
 
-		if title:
-			output += sep + get_title()
+		return output
 
-		if album:
-			output += sep + get_album()
+	@dbus.service.method('com.github.bpowell.gm_player')
+	def status2(self):
+		output = ""
+		output += "Artist: " + self.get_artist() + "\n"
+		output += "Title : " + self.get_title() + "\n"
+		output += "Album : " + self.get_album() + "\n"
 
 		return output
