@@ -25,3 +25,15 @@ When the program is started for the first time, it will prompt for paths to libw
 * /usr/lib/libwebkitgtk-1.0.so.0
 
 A directory is created in your home folder called .gm-player. It contains a config file containing these paths. Also inside of the folder is the cookie store. 
+
+## How to use it
+To start the program run gm-player.py. It will start up and do the configuration. gm-player-client is the tool that you use to control the player. The following commands are currently supported:
+
+* play or pp or pause - Plays and pauses the current track
+* prev                - Plays the previous track
+* next                - Plays the next track
+* status	      - Outputs on one line current artist, title and album
+* status2	      - Outputs on multiple lines current artist, title and album
+* artist	      - Outputs the current artist
+* title		      - Outputs the current title
+* album 	      - Outputs the current album
