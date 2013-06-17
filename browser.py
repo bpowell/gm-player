@@ -17,10 +17,13 @@ class Browser:
 		cookiejar = libsoup.soup_cookie_jar_text_new(self.config.getProperty("cookie"), False)
 		libsoup.soup_session_add_feature(session, cookiejar)
 
+		self.scroll = gtk.ScrolledWindow()
+
 		self.browser = webkit.WebView()
 		self.browser.open("https://music.google.com")
 		
-		self.window.add(self.browser)
+		self.scroll.add(self.browser)
+		self.window.add(self.scroll)
 		self.window.show_all()
 
 	def get_title(self):
