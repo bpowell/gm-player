@@ -36,6 +36,10 @@ def setup():
 def main():
 	global config
 	setup()
+
+	systray = gtk.StatusIcon()
+	systray.set_from_stock(gtk.STOCK_MEDIA_NEXT)
+
 	gm_player = browser.Browser(config)
 	DBusGMainLoop(set_as_default=True)
 	service = GMPlayerService(gm_player)
