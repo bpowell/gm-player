@@ -21,10 +21,14 @@ class Browser:
 
 		self.browser = webkit.WebView()
 		self.browser.open("https://music.google.com")
+		self.browser.connect("console-message", self.console)
 		
 		self.scroll.add(self.browser)
 		self.window.add(self.scroll)
 		self.window.show_all()
+
+	def console(self, webview, message, lineno, fileurl):
+		return True
 
 	def get_title(self):
 		self.browser.execute_script("var a=document.getElementById('playerSongTitle').firstChild;document.title=a.innerText||a.textContent")
