@@ -12,6 +12,7 @@ class GMPlayer:
 	def __init__(self):
 		self.window = gtk.Window()
 		self.window.resize(1024,768)
+		self.container = gtk.VBox()
 
 		self.config = Property()
 		self.configdir=os.path.expanduser("~")+'/.gm-player'
@@ -28,6 +29,22 @@ class GMPlayer:
 		self.systray = gtk.StatusIcon()
 		self.systray.set_from_stock(gtk.STOCK_MEDIA_NEXT)
 		self.systray.connect("popup-menu", self.right_click_systray)
+
+		filemenu = gtk.Menu()
+		quit = gtk.MenuItem("Quit")
+		filemenu.append(quit)
+		quit.connect("activate", gtk.main_quit)
+		quit.show()
+
+		menubar = gtk.MenuBar()
+		menubarbox = gtk.HBox()
+		menubarbox.pack_start(menubar)
+		menubar.show()
+		titlefile = gtk.MenuItem("File")
+		titlefile.show()
+		titlefile.set_submenu(filemenu)
+		menubar.append(titlefile)
+		self.container.pack_start(menubarbox, False)
 
 	def create_config(self):
 		p = Property()
@@ -49,7 +66,8 @@ class GMPlayer:
 
 	def main(self):
 		gm_player = browser.Browser(self.config)
-		self.window.add(gm_player.get_window())
+		self.container.pack_start(gm_player.get_window())
+		self.window.add(self.container)
 		self.window.show_all()
 
 		DBusGMainLoop(set_as_default=True)
