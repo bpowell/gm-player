@@ -2,6 +2,7 @@
 
 import dbus
 import argparse
+import sys
 
 object_path = "/com/github/bpowell/gm_player"
 name = "com.github.bpowell.gm_player"
@@ -13,8 +14,12 @@ args = parser.parse_args()
 action = args.action
 
 
-bus = dbus.SessionBus()
-gm_player_service = bus.get_object(name, object_path)
+try:
+	bus = dbus.SessionBus()
+	gm_player_service = bus.get_object(name, object_path)
+except:
+	print "gm-player.py not running."
+	sys.exit()	
 
 if action=='title':
 	title = gm_player_service.get_dbus_method('get_title', name)
