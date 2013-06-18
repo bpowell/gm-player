@@ -8,8 +8,6 @@ import ctypes
 class Browser:
 	def __init__(self, config):
 		self.config = config
-		self.window = gtk.Window()
-		self.window.resize(1024,768)
 
 		libsoup = ctypes.CDLL(self.config.getProperty("path_libsoup"))
 		libwebkit = ctypes.CDLL(self.config.getProperty("path_libwebkit"))
@@ -24,8 +22,9 @@ class Browser:
 		self.browser.connect("console-message", self.console)
 		
 		self.scroll.add(self.browser)
-		self.window.add(self.scroll)
-		self.window.show_all()
+
+	def get_window(self):
+		return self.scroll
 
 	def console(self, webview, message, lineno, fileurl):
 		return True

@@ -10,6 +10,9 @@ import os
 
 class GMPlayer:
 	def __init__(self):
+		self.window = gtk.Window()
+		self.window.resize(1024,768)
+
 		self.config = Property()
 		self.configdir=os.path.expanduser("~")+'/.gm-player'
 		self.configfile='config'
@@ -46,8 +49,12 @@ class GMPlayer:
 
 	def main(self):
 		gm_player = browser.Browser(self.config)
+		self.window.add(gm_player.get_window())
+		self.window.show_all()
+
 		DBusGMainLoop(set_as_default=True)
 		service = GMPlayerService(gm_player)
+
 
 if __name__ == "__main__":
 	gmplayer = GMPlayer()
