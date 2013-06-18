@@ -8,54 +8,48 @@ from dbus.mainloop.glib import DBusGMainLoop
 import gtk
 import os
 
-configdir=os.path.expanduser("~")+'/.gm-player'
-configfile='config'
-config = None
+class GMPlayer:
+	def __init__(self):
+		self.config = Property()
+		self.configdir=os.path.expanduser("~")+'/.gm-player'
+		self.configfile='config'
 
-def create_config():
-	p = Property()
-	path_libwebkit = raw_input("Path to libwebkit: ")
-	path_libsoup = raw_input("Path to libsoup: ")
-	p.setProperty("path_libwebkit", path_libwebkit)
-	p.setProperty("path_libsoup", path_libsoup)
-	p.setProperty("path_config", configdir)
-	p.setProperty("cookie", configdir+'/cookie')
-	p.store(open(configdir+'/'+configfile, 'w'))
+		if not os.path.isdir(self.configdir):
+			os.mkdir(self.configdir)
 
-def setup():
-	if not os.path.isdir(configdir):
-		os.mkdir(configdir)
+		if not os.path.isfile(self.configdir+'/'+self.configfile):
+			self.create_config()
 
-	if not os.path.isfile(configdir+'/'+configfile):
-		create_config()
+		self.config.load(open(self.configdir+'/'+self.configfile))
 
-	global config
-	config = Property()
-	config.load(open(configdir+'/'+configfile))
+		self.systray = gtk.StatusIcon()
+		self.systray.set_from_stock(gtk.STOCK_MEDIA_NEXT)
+		self.systray.connect("popup-menu", self.right_click_systray)
 
-def right_click_systray(icon, button, time):
-	menu = gtk.Menu()
-	quit = gtk.MenuItem("Quit")
-	quit.connect("activate", gtk.main_quit)
-	menu.append(quit)
-	menu.show_all()
-	global systray
-	menu.popup(None, None, gtk.status_icon_position_menu, button, time, systray)
+	def create_config(self):
+		p = Property()
+		path_libwebkit = raw_input("Path to libwebkit: ")
+		path_libsoup = raw_input("Path to libsoup: ")
+		p.setProperty("path_libwebkit", path_libwebkit)
+		p.setProperty("path_libsoup", path_libsoup)
+		p.setProperty("path_config", self.configdir)
+		p.setProperty("cookie", self.configdir+'/cookie')
+		p.store(open(configdir+'/'+self.configfile, 'w'))
 
-def main():
-	global config
-	global systray
-	setup()
+	def right_click_systray(self, icon, button, time):
+		menu = gtk.Menu()
+		quit = gtk.MenuItem("Quit")
+		quit.connect("activate", gtk.main_quit)
+		menu.append(quit)
+		menu.show_all()
+		menu.popup(None, None, gtk.status_icon_position_menu, button, time, self.systray)
 
-	systray = gtk.StatusIcon()
-	systray.set_from_stock(gtk.STOCK_MEDIA_NEXT)
-	systray.connect("popup-menu", right_click_systray)
-
-	gm_player = browser.Browser(config)
-	DBusGMainLoop(set_as_default=True)
-	service = GMPlayerService(gm_player)
-
-	gtk.main()
+	def main(self):
+		gm_player = browser.Browser(self.config)
+		DBusGMainLoop(set_as_default=True)
+		service = GMPlayerService(gm_player)
 
 if __name__ == "__main__":
-	main()
+	gmplayer = GMPlayer()
+	gmplayer.main()
+	gtk.main()
