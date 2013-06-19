@@ -4,6 +4,7 @@ GM-Player is a standalone application for Google Music. Because Google Music can
 ## Dependencies
 * libwebkit
 * libsoup
+* python2-notify
 
 ### libwebkit
 In Ubuntu based distros(including Mint):
@@ -17,6 +18,13 @@ This is needed for cookie management. In Ubuntu based distros(including Mint) as
 
 ```sh
 sudo apt-get install libsoup2.4-1
+```
+
+### python2-notify
+Because some of the webkit stuff uses gobject, we can't use the libnotify in python.
+
+```sh
+sudo apt-get install python2-notify
 ```
 
 ## Configuration
