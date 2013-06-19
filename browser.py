@@ -2,8 +2,8 @@
 
 import webkit
 import gtk
-
 import ctypes
+import pynotify
 
 class Browser:
 	def __init__(self, config):
@@ -20,14 +20,31 @@ class Browser:
 		self.browser = webkit.WebView()
 		self.browser.open("https://music.google.com")
 		self.browser.connect("console-message", self.console)
+		self.notifysignal = self.browser.connect("title-changed", self.notify)
+		self.browser.connect("load-finished", self.webapploaded)
 		
 		self.scroll.add(self.browser)
+
 
 	def get_window(self):
 		return self.scroll
 
 	def console(self, webview, message, lineno, fileurl):
 		return True
+
+	def notify(self, webview, webframe, title):
+		if title=="change":
+			self.browser.disconnect(self.notifysignal)
+			pynotify.init("Track change")
+			display = pynotify.Notification("Track Change", self.get_artist()+" - "+self.get_title()+" - "+self.get_album())
+			display.show()
+			self.notifysignal = self.browser.connect("title-changed", self.notify)
+
+
+	def webapploaded(self, webview, webframe):
+		self.browser.execute_script("SJBaddListener('nextSong', function qxz(){document.title='change';})")
+		self.browser.execute_script("SJBaddListener('prevSong', function qxz(){document.title='change';})")
+		self.browser.execute_script("SJBaddListener('playPause', function qxz(){document.title='change';})")
 
 	def get_title(self):
 		self.browser.execute_script("var a=document.getElementById('playerSongTitle').firstChild;document.title=a.innerText||a.textContent")
