@@ -54,7 +54,7 @@ class GMPlayer:
 		p.setProperty("path_libsoup", path_libsoup)
 		p.setProperty("path_config", self.configdir)
 		p.setProperty("cookie", self.configdir+'/cookie')
-		p.store(open(configdir+'/'+self.configfile, 'w'))
+		p.store(open(self.configdir+'/'+self.configfile, 'w'))
 
 	def right_click_systray(self, icon, button, time):
 		menu = gtk.Menu()
