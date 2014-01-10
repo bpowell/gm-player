@@ -62,7 +62,7 @@ class Browser:
 		self.browser.execute_script('SJBpost("playPause")')
 
 	def next(self):
-		self.browser.execute_script('SJBpost("nextSong")')
+		self.browser.execute_script('document.getElementsByClassName("flat-button")[3].click()')
 
 	def prev(self):
-		self.browser.execute_script('SJBpost("prevSong")')
+		self.browser.execute_script('document.getElementsByClassName("flat-button")[1].click()')
