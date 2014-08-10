@@ -2,3 +2,7 @@
 *.swp
 *.*.swp
 *.swo
+*.o
+gmplayer
+Makefile
+moc_*.cpp
