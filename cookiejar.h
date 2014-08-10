@@ -5,11 +5,11 @@
 #include <QtNetwork/QNetworkCookieJar>
 
 class CookieJar : public QNetworkCookieJar {
-	public:
-		CookieJar();
-		bool setCookiesFromUrl(const QList<QNetworkCookie> & cookieList, const QUrl & url);
-		void save();
-		void load();
+    public:
+        CookieJar();
+        bool setCookiesFromUrl(const QList<QNetworkCookie> & cookieList, const QUrl & url);
+        void save();
+        void load();
 };
 
 #endif

@@ -5,12 +5,12 @@
 #include <QtWebKitWidgets>
 
 class Browser : public QMainWindow {
-	Q_OBJECT
-	private:
-		QWebView *view;
+    Q_OBJECT
+    private:
+        QWebView *view;
 
-	public:
-		Browser();
+    public:
+        Browser();
 };
 
 #endif
