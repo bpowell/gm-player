@@ -7,3 +7,4 @@ gmplayer
 Makefile
 moc_*.cpp
 cookies.ini
+lastfm.ini
