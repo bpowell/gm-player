@@ -17,27 +17,27 @@ Browser::Browser() {
     connect(m_view, SIGNAL(titleChanged(QString)), this, SLOT(titleHasChanged(QString)));
 }
 
-QWebElement Browser::getElement(QString what) {
+QWebElement Browser::getElement(QString what) const {
     QWebFrame *frame = m_view->page()->mainFrame();
     return frame->findFirstElement(what);
 }
 
-QString Browser::getArtist() {
+QString Browser::getArtist() const {
     QWebElement element = getElement(".player-artist");
     return element.toPlainText();
 }
 
-QString Browser::getAlbum() {
+QString Browser::getAlbum()  const {
     QWebElement element = getElement(".playerSongTitle");
     return element.toPlainText();
 }
 
-int Browser::getTrackCurrentTime() {
+int Browser::getTrackCurrentTime() const {
     QWebElement element = getElement("#slider");
     return element.attribute("aria-valuemin").toInt();
 }
 
-int Browser::getTrackTotalTime() {
+int Browser::getTrackTotalTime() const {
     QWebElement element = getElement("#slider");
     return element.attribute("aria-valuemax").toInt();
 }
