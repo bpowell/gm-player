@@ -19,7 +19,7 @@ private:
     QNetworkReply *m_authenticateReply;
     lastfm::Audioscrobbler m_scrobbler;
     QString m_password;
-    QBoolean m_is_authenticated;
+    bool m_is_authenticated;
 
 public:
     LastFM();
