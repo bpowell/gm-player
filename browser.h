@@ -7,10 +7,19 @@
 class Browser : public QMainWindow {
     Q_OBJECT
     private:
-        QWebView *view;
+        QWebView *m_view;
+        QWebElement getElement(QString what);
 
     public:
         Browser();
+        QString getArtist();
+        QString getAlbum();
+        QString getTitle();
+        int getTrackCurrentTime();
+        int getTrackTotalTime();
+
+    private slots:
+        void titleHasChanged(QString title);
 };
 
 #endif
