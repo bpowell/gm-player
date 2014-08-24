@@ -1,7 +1,7 @@
 #include "browser.h"
 #include "cookiejar.h"
 
-Browser::Browser() {
+Browser::Browser(LastFM *lastFM) : lastFM(lastFM) {
     //Flash support
     QWebSettings::globalSettings()->setAttribute(QWebSettings::PluginsEnabled, true);
 
