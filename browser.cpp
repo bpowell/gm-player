@@ -2,6 +2,8 @@
 #include "cookiejar.h"
 
 Browser::Browser(LastFM *lastFM) : lastFM(lastFM) {
+    currentTrack = NULL;
+
     //Flash support
     QWebSettings::globalSettings()->setAttribute(QWebSettings::PluginsEnabled, true);
 
@@ -15,6 +17,10 @@ Browser::Browser(LastFM *lastFM) : lastFM(lastFM) {
     m_view->setGeometry(0,0,800,600);
 
     connect(m_view, SIGNAL(titleChanged(QString)), this, SLOT(titleHasChanged(QString)));
+
+    QTimer *timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+    timer->start(1000);
 }
 
 QWebElement Browser::getElement(QString what) const {
@@ -47,5 +53,27 @@ int Browser::getTrackTotalTime() const {
     return element.attribute("aria-valuemax").toInt();
 }
 
+Track *Browser::getTrack() {
+    Track *track;
+    QString artist = getArtist();
+    if(artist.isEmpty()) {
+        track = NULL;
+    } else {
+        track = new Track(artist, getTitle(), getAlbum());
+    }
+
+    return track;
+}
+
 void Browser::titleHasChanged(QString title) {
+}
+
+void Browser::update() {
+    QWebElementCollection collection = m_view->page()->mainFrame()->findAllElements(".flat-button");
+    Track *trackPlaying = getTrack();
+
+    //Determine if music is even playing (or paused)
+    if (collection.at(3).hasAttribute("disabled")==true) {
+        return;
+    }
 }
