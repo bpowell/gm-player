@@ -27,8 +27,13 @@ QString Browser::getArtist() const {
     return element.toPlainText();
 }
 
-QString Browser::getAlbum()  const {
+QString Browser::getTitle()  const {
     QWebElement element = getElement(".playerSongTitle");
+    return element.toPlainText();
+}
+
+QString Browser::getAlbum()  const {
+    QWebElement element = getElement(".player-album");
     return element.toPlainText();
 }
 
