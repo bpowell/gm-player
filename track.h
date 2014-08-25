@@ -2,6 +2,7 @@
 #define TRACK_H_
 
 #include <QtCore>
+#include <ostream>
 
 class Track {
     private:
@@ -15,6 +16,7 @@ class Track {
         QString getAlbum() const;
 
         bool operator==(const Track &track);
+        friend std::ostream &operator<<(std::ostream &out, Track track);
         Track(QString artist, QString title, QString album);
 };
 

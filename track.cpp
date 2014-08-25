@@ -25,3 +25,8 @@ bool Track::operator==(const Track &track) {
         return false;
     }
 }
+
+std::ostream Track::operator<<(std::ostream &out, Track tack) {
+    out << "Artist: " << m_artist << ", Title: " << m_title << ", Album: " << m_album;
+    return out;
+}
