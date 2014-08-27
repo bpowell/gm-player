@@ -16,6 +16,22 @@ QString Track::getAlbum() const {
     return m_album;
 }
 
+int Track::getPlayedTime() const {
+    return m_playedTime;
+}
+
+int Track::getTotalTime() const {
+    return m_totalTime;
+}
+
+void Track::setPlayedTime(int t) {
+    m_playedTime = t;
+}
+
+void Track::setTotalTime(int t) {
+    m_totalTime = t;
+}
+
 bool Track::operator==(const Track &track) {
     if(m_artist==track.getArtist() &&
             m_title==track.getTitle() &&
@@ -26,7 +42,9 @@ bool Track::operator==(const Track &track) {
     }
 }
 
-std::ostream Track::operator<<(std::ostream &out, Track tack) {
-    out << "Artist: " << m_artist << ", Title: " << m_title << ", Album: " << m_album;
+std::ostream &operator<<(std::ostream &out, Track &track) {
+    out << "Artist: " << track.getArtist().toStdString()
+        << ", Title: " << track.getTitle().toStdString()
+        << ", Album: " << track.getAlbum().toStdString();
     return out;
 }
