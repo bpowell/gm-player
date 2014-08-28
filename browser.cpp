@@ -60,6 +60,8 @@ Track *Browser::getTrack() {
         track = NULL;
     } else {
         track = new Track(artist, getTitle(), getAlbum());
+        track->setPlayedTime(getTrackCurrentTime());
+        track->setTotalTime(getTrackTotalTime());
     }
 
     return track;
