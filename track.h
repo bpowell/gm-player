@@ -11,6 +11,7 @@ class Track {
         QString m_album;
         int m_playedTime;
         int m_totalTime;
+        bool m_scrobbled;
 
     public:
         QString getArtist() const;
@@ -18,9 +19,11 @@ class Track {
         QString getAlbum() const;
         int getPlayedTime() const;
         int getTotalTime() const;
+        bool isScrobbled() const;
 
         void setPlayedTime(int t);
         void setTotalTime(int t);
+        void setScrobbled(bool s);
 
         bool operator==(const Track &track);
         Track(QString artist, QString title, QString album);

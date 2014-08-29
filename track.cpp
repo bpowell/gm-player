@@ -1,7 +1,7 @@
 #include "track.h"
 
 Track::Track(QString artist, QString title, QString album) :
-    m_artist(artist), m_title(title), m_album(album) {
+    m_artist(artist), m_title(title), m_album(album), m_scrobbled(false) {
     }
 
 QString Track::getArtist() const {
@@ -24,12 +24,20 @@ int Track::getTotalTime() const {
     return m_totalTime;
 }
 
+bool Track::isScrobbled() const {
+    return m_scrobbled;
+}
+
 void Track::setPlayedTime(int t) {
     m_playedTime = t;
 }
 
 void Track::setTotalTime(int t) {
     m_totalTime = t;
+}
+
+void Track::setScrobbled(bool s) {
+    m_scrobbled = s;
 }
 
 bool Track::operator==(const Track &track) {
