@@ -41,10 +41,6 @@ void Track::setScrobbled(bool s) {
 }
 
 bool Track::operator==(const Track &track) {
-    if(track==NULL) {
-        return false;
-    }
-
     if(m_artist==track.getArtist() &&
             m_title==track.getTitle() &&
             m_album==track.getAlbum()) {
