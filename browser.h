@@ -13,7 +13,7 @@ class Browser : public QMainWindow {
         LastFM *lastFM;
         QWebView *m_view;
         QWebElement getElement(QString what) const;
-        Track *currentTrack;
+        MyTrack *currentTrack;
 
     public:
         Browser(LastFM *lastFM);
@@ -22,7 +22,7 @@ class Browser : public QMainWindow {
         QString getTitle() const;
         int getTrackCurrentTime() const;
         int getTrackTotalTime() const;
-        Track *getTrack();
+        MyTrack *getTrack();
 
     private slots:
         void titleHasChanged(QString title);

@@ -53,13 +53,13 @@ int Browser::getTrackTotalTime() const {
     return element.attribute("aria-valuemax").toInt();
 }
 
-Track *Browser::getTrack() {
-    Track *track;
+MyTrack *Browser::getTrack() {
+    MyTrack *track;
     QString artist = getArtist();
     if(artist.isEmpty()) {
         track = NULL;
     } else {
-        track = new Track(artist, getTitle(), getAlbum());
+        track = new MyTrack(artist, getTitle(), getAlbum());
         track->setPlayedTime(getTrackCurrentTime());
         track->setTotalTime(getTrackTotalTime());
     }
