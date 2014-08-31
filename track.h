@@ -4,6 +4,8 @@
 #include <QtCore>
 #include <ostream>
 
+#include <Track.h>
+
 class MyTrack {
     private:
         QString m_artist;
@@ -12,6 +14,7 @@ class MyTrack {
         int m_playedTime;
         int m_totalTime;
         bool m_scrobbled;
+        lastfm::MutableTrack m_track;
 
     public:
         QString getArtist() const;
@@ -28,6 +31,8 @@ class MyTrack {
 
         bool equals(const MyTrack *track);
         MyTrack(QString artist, QString title, QString album);
+
+        void scrobble();
 };
 
 #endif

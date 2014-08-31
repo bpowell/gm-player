@@ -1,7 +1,12 @@
 #include "track.h"
+#include "lastfm.h"
 
 MyTrack::MyTrack(QString artist, QString title, QString album) :
     m_artist(artist), m_title(title), m_album(album), m_scrobbled(false) {
+        m_track.setArtist(artist);
+        m_track.setTitle(title);
+        m_track.setAlbum(album);
+        m_track.stamp();
     }
 
 QString MyTrack::getArtist() const {
@@ -60,4 +65,8 @@ QString MyTrack::toString() const {
     ret += ", Track: " + getTitle();
 
     return ret;
+}
+
+void MyTrack::scrobble() {
+    m_track.scrobble();
 }
