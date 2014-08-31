@@ -4,7 +4,7 @@
 #include <QtCore>
 #include <ostream>
 
-class Track {
+class MyTrack {
     private:
         QString m_artist;
         QString m_title;
@@ -20,13 +20,14 @@ class Track {
         int getPlayedTime() const;
         int getTotalTime() const;
         bool isScrobbled() const;
+        QString toString() const;
 
         void setPlayedTime(int t);
         void setTotalTime(int t);
         void setScrobbled(bool s);
 
-        bool operator==(const Track &track);
-        Track(QString artist, QString title, QString album);
+        bool equals(const MyTrack *track);
+        MyTrack(QString artist, QString title, QString album);
 };
 
 #endif
