@@ -45,7 +45,7 @@ QString Browser::getAlbum()  const {
 
 int Browser::getTrackCurrentTime() const {
     QWebElement element = getElement("#slider");
-    return element.attribute("aria-valuemin").toInt();
+    return element.attribute("aria-valuenow").toInt();
 }
 
 int Browser::getTrackTotalTime() const {
