@@ -72,10 +72,29 @@ void Browser::titleHasChanged(QString title) {
 
 void Browser::update() {
     QWebElementCollection collection = m_view->page()->mainFrame()->findAllElements(".flat-button");
-    Track *trackPlaying = getTrack();
-
     //Determine if music is even playing (or paused)
-    if (collection.at(3).hasAttribute("disabled")==true) {
+    if(collection.at(3).hasAttribute("disabled")==true) {
         return;
+    }
+
+    //No track is playing. If we are at this point this should not be NULL
+    //  but you never know
+    MyTrack *trackPlaying = getTrack();
+    if(trackPlaying==NULL) {
+        return;
+    }
+
+    if(!trackPlaying->equals(currentTrack)) {
+        currentTrack = trackPlaying;
+    }
+
+    currentTrack->setPlayedTime(trackPlaying->getPlayedTime());
+
+    if(!currentTrack->isScrobbled()) {
+        //If we have played over half the song, scrobble
+        if(currentTrack->getPlayedTime() >= currentTrack->getTotalTime()/2) {
+            currentTrack->setScrobbled(true);
+            currentTrack->scrobble();
+        }
     }
 }
