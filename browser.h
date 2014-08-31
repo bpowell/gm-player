@@ -4,19 +4,17 @@
 #include <QtWidgets>
 #include <QtWebKitWidgets>
 
-#include "lastfm.h"
 #include "track.h"
 
 class Browser : public QMainWindow {
     Q_OBJECT
     private:
-        LastFM *lastFM;
         QWebView *m_view;
         QWebElement getElement(QString what) const;
         MyTrack *currentTrack;
 
     public:
-        Browser(LastFM *lastFM);
+        Browser();
         QString getArtist() const;
         QString getAlbum() const;
         QString getTitle() const;

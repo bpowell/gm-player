@@ -1,7 +1,7 @@
 #include "browser.h"
 #include "cookiejar.h"
 
-Browser::Browser(LastFM *lastFM) : lastFM(lastFM) {
+Browser::Browser() {
     currentTrack = NULL;
 
     //Flash support
