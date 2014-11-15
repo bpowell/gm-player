@@ -14,7 +14,8 @@ Browser::Browser() {
     nam->setCookieJar(cookies);
     m_view->page()->setNetworkAccessManager(nam);
     m_view->load(QUrl("https://music.google.com"));
-    m_view->setGeometry(0,0,800,600);
+    this->setGeometry(0,0,1280,1024);
+    m_view->setGeometry(this->geometry());
 
     connect(m_view, SIGNAL(titleChanged(QString)), this, SLOT(titleHasChanged(QString)));
 
