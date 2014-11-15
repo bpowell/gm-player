@@ -13,6 +13,9 @@ class Browser : public QMainWindow {
         QWebElement getElement(QString what) const;
         MyTrack *currentTrack;
 
+    protected:
+        void resizeEvent(QResizeEvent *event);
+
     public:
         Browser();
         QString getArtist() const;

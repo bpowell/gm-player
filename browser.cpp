@@ -99,3 +99,10 @@ void Browser::update() {
         }
     }
 }
+
+void Browser::resizeEvent(QResizeEvent* event)
+{
+    QMainWindow::resizeEvent(event);
+    QRect r = this->geometry();
+    m_view->setGeometry(0,0,r.width(),r.height());
+}
